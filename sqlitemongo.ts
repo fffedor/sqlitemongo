@@ -18,7 +18,7 @@ async function sqliteMongo(sqlitepath: string, mongoURI: string, mongoDbName = '
 		const tables = await getSqliteTables();
 		return Promise.all(tables.map(async function uploadTable(tableName) {
 			let rows = await getSqliteRows(tableName);
-			return uploadToMongo(tableName, rows);
+			return uploadToMongo(tableName.toLowerCase(), rows);
 		}));
 	}
 	return uploadAllTablesToMongo().finally(closeDb);
